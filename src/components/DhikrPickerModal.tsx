@@ -1,5 +1,6 @@
 import React from 'react';
 import { Modal, View, Text, StyleSheet, FlatList, TouchableOpacity, SafeAreaView } from 'react-native';
+import i18n from '../i18n';
 import { Ionicons } from '@expo/vector-icons';
 import { DhikrItem } from '../store/useDhikrStore';
 import { DhikrCard } from './DhikrCard';
@@ -22,7 +23,7 @@ export const DhikrPickerModal: React.FC<DhikrPickerModalProps> = ({
         <Modal visible={visible} animationType="slide" presentationStyle="pageSheet" onRequestClose={onClose}>
             <SafeAreaView style={styles.container}>
                 <View style={styles.header}>
-                    <Text style={styles.title}>Zikirlerim</Text>
+                    <Text style={styles.title}>{i18n.t('tab_my_dhikrs')}</Text>
                     <TouchableOpacity onPress={onClose} style={styles.closeBtn}>
                         <Ionicons name="close" size={28} color="#333" />
                     </TouchableOpacity>
@@ -44,14 +45,14 @@ export const DhikrPickerModal: React.FC<DhikrPickerModalProps> = ({
                     ListEmptyComponent={
                         <View style={styles.emptyContainer}>
                             <Ionicons name="list" size={48} color="#ddd" />
-                            <Text style={styles.empty}>Listeniz boş. Yeni ekleyerek başlayın.</Text>
+                            <Text style={styles.empty}>{i18n.t('empty_list')}</Text>
                         </View>
                     }
                 />
 
                 <TouchableOpacity style={styles.fab} onPress={onAdd}>
                     <Ionicons name="add" size={32} color="white" />
-                    <Text style={styles.fabText}>Yeni Zikir</Text>
+                    <Text style={styles.fabText}>{i18n.t('btn_new_dhikr')}</Text>
                 </TouchableOpacity>
             </SafeAreaView>
         </Modal>

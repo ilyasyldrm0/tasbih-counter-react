@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, Animated } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useEffect, useRef } from 'react';
 import { Ionicons } from '@expo/vector-icons';
+import i18n from '../src/i18n';
 
 export default function WelcomeScreen() {
     const router = useRouter();
@@ -34,8 +35,8 @@ export default function WelcomeScreen() {
         <View style={styles.container}>
             <Animated.View style={[styles.content, { opacity: fadeAnim, transform: [{ scale: scaleAnim }] }]}>
                 <Ionicons name="finger-print" size={80} color="#3498db" />
-                <Text style={styles.title}>Zikirmatik</Text>
-                <Text style={styles.subtitle}>Kalbinizi huzurla doldurun</Text>
+                <Text style={styles.title}>{i18n.t('welcome_title')}</Text>
+                <Text style={styles.subtitle}>{i18n.t('welcome_subtitle')}</Text>
             </Animated.View>
         </View>
     );

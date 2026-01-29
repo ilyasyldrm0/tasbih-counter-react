@@ -5,6 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useDhikrStore, DhikrItem } from '../../src/store/useDhikrStore';
 import { DhikrCard } from '../../src/components/DhikrCard';
 import { DhikrFormModal } from '../../src/components/DhikrFormModal';
+import i18n from '../../src/i18n';
 
 export default function MyDhikrsScreen() {
     const router = useRouter();
@@ -26,9 +27,9 @@ export default function MyDhikrsScreen() {
     };
 
     const handleDelete = (id: string) => {
-        Alert.alert("Sil", "Bu zikri silmek istediğinize emin misiniz?", [
-            { text: "İptal", style: "cancel" },
-            { text: "Sil", style: "destructive", onPress: () => deleteDhikr(id) }
+        Alert.alert(i18n.t('alert_title_delete'), i18n.t('alert_msg_delete'), [
+            { text: i18n.t('btn_cancel'), style: "cancel" },
+            { text: i18n.t('btn_delete'), style: "destructive", onPress: () => deleteDhikr(id) }
         ]);
     };
 
@@ -50,8 +51,8 @@ export default function MyDhikrsScreen() {
                 ListEmptyComponent={
                     <View style={styles.emptyContainer}>
                         <Ionicons name="list" size={64} color="#ddd" />
-                        <Text style={styles.emptyText}>Henüz kayıtlı zikir yok.</Text>
-                        <Text style={styles.emptySubText}>Tavsiyelerden ekleyebilir veya Zikirmatik ekranından yeni oluşturabilirsiniz.</Text>
+                        <Text style={styles.emptyText}>{i18n.t('empty_list')}</Text>
+                        <Text style={styles.emptySubText}>{i18n.t('empty_subtext')}</Text>
                     </View>
                 }
             />
@@ -61,7 +62,7 @@ export default function MyDhikrsScreen() {
                 onClose={() => { setFormVisible(false); setEditingDhikr(null); }}
                 onSubmit={handleUpdate}
                 initialData={editingDhikr}
-                title="Zikir Düzenle"
+                title={editingDhikr ? i18n.t('edit_dhikr_title') : i18n.t('new_dhikr_title')}
             />
         </View>
     );

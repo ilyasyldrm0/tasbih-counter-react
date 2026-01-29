@@ -1,5 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, Dimensions, View } from 'react-native';
+import i18n from '../i18n';
 
 interface CounterButtonProps {
     onPress: () => void;

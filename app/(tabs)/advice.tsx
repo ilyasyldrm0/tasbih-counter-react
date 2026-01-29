@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
-import { RECOMMENDATIONS, Recommendation } from '../../src/data/recommendations';
+import { getRecommendations, Recommendation } from '../../src/data/recommendations';
 import { useDhikrStore } from '../../src/store/useDhikrStore';
+import i18n from '../../src/i18n';
 
 export default function AdviceScreen() {
     const router = useRouter();
@@ -16,7 +17,7 @@ export default function AdviceScreen() {
     const handleSave = (item: Recommendation) => {
         const exists = dhikrs.some(d => d.text === item.text);
         if (exists) {
-            Alert.alert("Bilgi", "Bu zikir zaten listenizde mevcut.");
+            Alert.alert(i18n.t('advice_title'), i18n.t('alert_msg_exists'));
             return;
         }
         createDhikr({
@@ -25,7 +26,7 @@ export default function AdviceScreen() {
             reason: item.reason,
             target: item.target
         });
-        Alert.alert("Başarılı", "Zikir listenize eklendi.");
+        Alert.alert(i18n.t('advice_title'), i18n.t('alert_msg_added'));
     };
 
     const renderItem = ({ item }: { item: Recommendation }) => (
@@ -33,14 +34,14 @@ export default function AdviceScreen() {
             <View style={styles.content}>
                 <Text style={styles.text}>{item.text}</Text>
                 <Text style={styles.reason}>{item.reason}</Text>
-                {item.target && <Text style={styles.target}>Tavsiye Edilen Hedef: {item.target}</Text>}
+                {item.target && <Text style={styles.target}>{i18n.t('target_recommended', { target: item.target })}</Text>}
             </View>
             <View style={styles.actions}>
                 <TouchableOpacity style={[styles.btn, styles.saveBtn]} onPress={() => handleSave(item)}>
-                    <Text style={styles.btnTextSave}>Kaydet</Text>
+                    <Text style={styles.btnTextSave}>{i18n.t('btn_save')}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.btn, styles.startBtn]} onPress={() => handleStart(item)}>
-                    <Text style={styles.btnTextStart}>Başla</Text>
+                    <Text style={styles.btnTextStart}>{i18n.t('btn_start')}</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -49,11 +50,11 @@ export default function AdviceScreen() {
     return (
         <View style={styles.container}>
             <FlatList
-                data={RECOMMENDATIONS}
+                data={getRecommendations()} // Dynamic data
                 keyExtractor={item => item.text}
                 renderItem={renderItem}
                 contentContainerStyle={styles.list}
-                ListHeaderComponent={<Text style={styles.headerTitle}>Günlük Zikir Tavsiyeleri</Text>}
+                ListHeaderComponent={<Text style={styles.headerTitle}>{i18n.t('advice_title')}</Text>}
             />
         </View>
     );

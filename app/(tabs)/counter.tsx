@@ -7,6 +7,7 @@ import { useDhikrStore, DhikrItem } from '../../src/store/useDhikrStore';
 import { CounterButton } from '../../src/components/CounterButton';
 import { DhikrPickerModal } from '../../src/components/DhikrPickerModal';
 import { DhikrFormModal } from '../../src/components/DhikrFormModal';
+import i18n from '../../src/i18n';
 
 export default function CounterScreen() {
     useKeepAwake();
@@ -20,9 +21,9 @@ export default function CounterScreen() {
 
     const handleIncrement = () => {
         if (!activeDhikr) {
-            Alert.alert("Zikir Seçilmedi", "Lütfen başlamak için bir zikir seçin.", [
-                { text: "Listeyi Aç", onPress: () => setPickerVisible(true) },
-                { text: "İptal", style: "cancel" }
+            Alert.alert(i18n.t('alert_title_select'), i18n.t('alert_msg_select'), [
+                { text: i18n.t('btn_open_list'), onPress: () => setPickerVisible(true) },
+                { text: i18n.t('btn_cancel'), style: "cancel" }
             ]);
             return;
         }
@@ -44,15 +45,13 @@ export default function CounterScreen() {
     };
 
     const handleDelete = (id: string) => {
-        Alert.alert("Sil", "Bu zikri silmek istediğinize emin misiniz?", [
-            { text: "İptal", style: "cancel" },
-            { text: "Sil", style: "destructive", onPress: () => deleteDhikr(id) }
+        Alert.alert(i18n.t('alert_title_delete'), i18n.t('alert_msg_delete'), [
+            { text: i18n.t('btn_cancel'), style: "cancel" },
+            { text: i18n.t('btn_delete'), style: "destructive", onPress: () => deleteDhikr(id) }
         ]);
     };
 
-    // Status color
-    const progress = activeDhikr?.target ? (activeDhikr.totalCount / activeDhikr.target) : 0;
-    const isCompleted = activeDhikr?.target && activeDhikr.totalCount >= activeDhikr.target;
+    // ... status color
 
     return (
         <SafeAreaView style={styles.container}>
@@ -62,11 +61,11 @@ export default function CounterScreen() {
                 </TouchableOpacity>
                 <View style={styles.headerInfo}>
                     <Text style={styles.headerTitle} numberOfLines={1}>
-                        {activeDhikr ? activeDhikr.name : "Bir Zikir Seçin"}
+                        {activeDhikr ? activeDhikr.name : i18n.t('select_dhikr')}
                     </Text>
                     {activeDhikr && (
                         <Text style={styles.headerSubtitle}>
-                            Bugün (Oturum): {activeSession.count}
+                            {i18n.t('session_today', { count: activeSession.count })}
                         </Text>
                     )}
                 </View>
@@ -90,21 +89,21 @@ export default function CounterScreen() {
                     disabled={!activeDhikr || activeSession.count === 0}
                 >
                     <Ionicons name="arrow-undo" size={24} color={(!activeDhikr || activeSession.count === 0) ? "#ccc" : "#333"} />
-                    <Text style={[styles.footerBtnText, (!activeDhikr || activeSession.count === 0) && { color: "#ccc" }]}>Geri Al</Text>
+                    <Text style={[styles.footerBtnText, (!activeDhikr || activeSession.count === 0) && { color: "#ccc" }]}>{i18n.t('undo')}</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                     style={styles.footerBtn}
                     onPress={() => {
-                        Alert.alert("Sıfırla", "Oturum sayacını sıfırlamak istiyor musunuz? Toplam zikir etkilenmez.", [
-                            { text: "İptal", style: "cancel" },
-                            { text: "Sıfırla", onPress: resetSession }
+                        Alert.alert(i18n.t('alert_title_reset'), i18n.t('alert_msg_reset'), [
+                            { text: i18n.t('btn_cancel'), style: "cancel" },
+                            { text: i18n.t('reset'), onPress: resetSession }
                         ]);
                     }}
                     disabled={!activeDhikr || activeSession.count === 0}
                 >
                     <Ionicons name="refresh" size={24} color={(!activeDhikr || activeSession.count === 0) ? "#ccc" : "#333"} />
-                    <Text style={[styles.footerBtnText, (!activeDhikr || activeSession.count === 0) && { color: "#ccc" }]}>Sıfırla</Text>
+                    <Text style={[styles.footerBtnText, (!activeDhikr || activeSession.count === 0) && { color: "#ccc" }]}>{i18n.t('reset')}</Text>
                 </TouchableOpacity>
             </View>
 
@@ -124,7 +123,7 @@ export default function CounterScreen() {
                 onClose={() => { setFormVisible(false); setEditingDhikr(null); }}
                 onSubmit={handleCreateOrUpdate}
                 initialData={editingDhikr}
-                title={editingDhikr ? "Zikir Düzenle" : "Yeni Zikir Ekle"}
+                title={editingDhikr ? i18n.t('edit_dhikr_title') : i18n.t('new_dhikr_title')}
             />
         </SafeAreaView>
     );
