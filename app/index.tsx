@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet, Animated } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useEffect, useRef } from 'react';
 import { Ionicons } from '@expo/vector-icons';
@@ -32,13 +33,13 @@ export default function WelcomeScreen() {
     }, []);
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container}>
             <Animated.View style={[styles.content, { opacity: fadeAnim, transform: [{ scale: scaleAnim }] }]}>
                 <Ionicons name="finger-print" size={80} color="#3498db" />
                 <Text style={styles.title}>{i18n.t('welcome_title')}</Text>
                 <Text style={styles.subtitle}>{i18n.t('welcome_subtitle')}</Text>
             </Animated.View>
-        </View>
+        </SafeAreaView>
     );
 }
 

@@ -1,5 +1,6 @@
 import React from 'react';
-import { Modal, View, Text, StyleSheet, FlatList, TouchableOpacity, SafeAreaView } from 'react-native';
+import { Modal, View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import i18n from '../i18n';
 import { Ionicons } from '@expo/vector-icons';
 import { DhikrItem } from '../store/useDhikrStore';

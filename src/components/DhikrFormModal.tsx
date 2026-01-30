@@ -40,31 +40,31 @@ export const DhikrFormModal: React.FC<DhikrFormProps> = ({ visible, onClose, onS
                     <Text style={styles.title}>{title}</Text>
 
                     <ScrollView contentContainerStyle={styles.scroll}>
-                        <Text style={styles.label}>Zikir Adı *</Text>
+                        <Text style={styles.label}>{i18n.t('label_name')}</Text>
                         <TextInput
                             style={styles.input}
                             value={name}
                             onChangeText={setName}
-                            placeholder="Örn: Günlük Tesbihat"
+                            placeholder={i18n.t('placeholder_name')}
                             placeholderTextColor="#999"
                         />
 
-                        <Text style={styles.label}>Zikir Metni</Text>
+                        <Text style={styles.label}>{i18n.t('label_text')}</Text>
                         <TextInput
                             style={[styles.input, styles.textArea]}
                             value={text}
                             onChangeText={setText}
-                            placeholder="Örn: Subhanallah"
+                            placeholder={i18n.t('placeholder_text')}
                             placeholderTextColor="#999"
                             multiline
                         />
 
-                        <Text style={styles.label}>Hedef (Opsiyonel)</Text>
+                        <Text style={styles.label}>{i18n.t('label_target')}</Text>
                         <TextInput
                             style={styles.input}
                             value={target}
                             onChangeText={setTarget}
-                            placeholder="Örn: 33"
+                            placeholder={i18n.t('placeholder_target')}
                             placeholderTextColor="#999"
                             keyboardType="number-pad"
                         />
@@ -72,10 +72,10 @@ export const DhikrFormModal: React.FC<DhikrFormProps> = ({ visible, onClose, onS
 
                     <View style={styles.buttons}>
                         <TouchableOpacity style={[styles.btn, styles.cancelBtn]} onPress={onClose}>
-                            <Text style={styles.btnTextCancel}>İptal</Text>
+                            <Text style={styles.btnTextCancel}>{i18n.t('btn_cancel')}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={[styles.btn, styles.saveBtn]} onPress={handleSave}>
-                            <Text style={styles.btnTextSave}>Kaydet</Text>
+                            <Text style={styles.btnTextSave}>{i18n.t('btn_save')}</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
