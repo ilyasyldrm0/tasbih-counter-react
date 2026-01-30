@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "tasbih-counter-react",
-    "slug": "tasbih-counter-react",
+    "slug": "tasbih-counter",
     "scheme": "zikirmatik",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -30,6 +30,13 @@
     },
     "plugins": [
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "fc69c5e0-17cd-4ae1-9844-0726a4a43355"
+      }
+    },
+    "owner": "boztek-ltd"
   }
 }

@@ -52,5 +52,7 @@ export const tr = {
     // My Dhikrs
     active_badge: "AKTİF",
     total_count: "Toplam: %{count}",
-    empty_subtext: "Tavsiyelerden ekleyebilir veya Zikirmatik ekranından yeni oluşturabilirsiniz."
+    empty_subtext: "Tavsiyelerden ekleyebilir veya Zikirmatik ekranından yeni oluşturabilirsiniz.",
+
+    btn_new_dhikr: "Yeni Zikir"
 };

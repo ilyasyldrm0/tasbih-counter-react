@@ -52,5 +52,7 @@ export const en = {
     // My Dhikrs
     active_badge: "ACTIVE",
     total_count: "Total: %{count}",
-    empty_subtext: "You can add from recommendations or create new from the Counter screen."
+    empty_subtext: "You can add from recommendations or create new from the Counter screen.",
+
+    btn_new_dhikr: "New Dhikr"
 };
